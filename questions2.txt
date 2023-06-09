@@ -1,0 +1,99 @@
+# Answer the following questions for the Zillow assignment
+
+1. Which models did you try, and how did they compare? If you only tried one model, why did you choose this model?
+
+I have used Linear Regression and Random Forest Regression Models. The MSE and MAE for both models are as follows:
+
+Linear Regression:
+Mean squared error: 0.027933701230732137
+Mean absolute error: 0.06950729432959318
+
+Random Forest Regressor:
+Mean squared error: 0.026854937795368686
+Mean absolute error: 0.06919057670910995
+
+Comparing the performance of the two models on the Zillow dataset, the random forest regressor model performed slightly better than the linear regression model in terms of MSE and MAE. 
+The MSE for the random forest model was 0.0269 compared to 0.0279 for the linear regression model, and the MAE for the random forest model was 0.0692 compared to 0.0695 for the linear regression model.
+Therefore, based on these results, it appears that the random forest regressor model may be a better choice for the Zillow dataset compared to the linear regression model. 
+
+
+2. Choose three numeric fields and examine the distribution of those fields. 
+Based on your observations, what kind of distribution did you find, and what steps would you take, if any, to prepare the data in those fields?
+
+Field: unitcnt
+Distribution: 
+NaN	    58798
+1.0      101916
+2.0        4385
+4.0        1597
+3.0        1148
+6.0           2
+143.0         1
+11.0          1
+9.0           1
+5.0           1
+70.0          1
+45.0          1
+42.0          1
+237.0         1
+Name: unitcnt, dtype: int64
+Since there are a few outliers in this distribution, I would remove them and impute the data with their median values. 
+There are approximately 35% missing values which can be imputed by KNN imputation through the number of rooms, number of bathrooms, area of the house, and the location. 
+
+Field: yearbuilt
+Distribution: 
+NaN	    1026
+1955.0    4236
+1989.0    3846
+1950.0    3670
+1964.0    3567
+1954.0    3530
+          ... 
+1886.0       1
+1878.0       1
+1883.0       1
+1889.0       1
+1880.0       1
+Name: yearbuilt, Length: 138, dtype: int64
+The distribution of the yearbuilt field appears to be right-skewed with a relatively high frequency of missing values. There are also a few years that have very low frequencies.
+To prepare the data in this field, one approach could be to impute the missing values with either the mean or the median of the available data.
+We can take a reference year and convert this column through Min-Max Scaling (Normalization).
+
+Field: structuretaxvaluedollarcnt
+Distribution: 
+NaN	      495
+100000.0    168
+200000.0    120
+90000.0     113
+150000.0    111
+140000.0     98
+           ... 
+458907.0      1
+114441.0      1
+113.0         1
+208163.0      1
+32797.0       1
+Name: structuretaxvaluedollarcnt, Length: 96512, dtype: int64
+
+This is highly right-skewed data. We need to use Log Transformation to transform this highly skewed data to a more normal distribution.
+To impute missing values, we can use the mean value or use KNN with a few more data points like the number of rooms, number of bathrooms, area of the house, and location.
+I would combine features for Feature Engineering, select more models and compare them with my initial models.
+
+3. What was your final score, and what steps would you attribute to improving your score during data preparation, model selection, or parameter tuning?
+My scores for the two models I used are:
+Linear Regression:
+Mean squared error: 0.027933701230732137
+Mean absolute error: 0.06950729432959318
+
+Random Forest Regressor:
+Mean squared error: 0.026854937795368686
+Mean absolute error: 0.06919057670910995
+If I had to optimize my EAD analysis, I would have used Scaling to normalize the data. I would be using Random/Grid search to fine-tune my model parameters.
+
+If you used AI assistants such as Copilot & ChapGPT:
+
+- Which AI tools did you use and for what part of the solution?
+
+- Optional: share any reflection on using such tools. For instance, did they contribute to your learning? Were they more helpful than harmful? Did you notice any mistakes in their outputs?
+
+I have used ChatGPT to optimize my code and clean it to look presentable and clean. It was also helpful in creating comments and markdown headers for the python workbook.
